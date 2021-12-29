@@ -8,7 +8,7 @@ const AllEvents = () => {
     const [control, setConrol] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:5000/events")
+        fetch("https://ancient-lake-01432.herokuapp.com/events")
             .then((res) => res.json())
             .then((data) => setEvent(data));
     }, [control]);
@@ -16,7 +16,7 @@ const AllEvents = () => {
     // const event = useSelector(state => state.volunteer.events)
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/deleteEvent/${id}`, {
+        fetch(`https://ancient-lake-01432.herokuapp.com/deleteEvent/${id}`, {
             method: "DELETE",
             headers: { "content-type": "application/json" },
         })

@@ -14,7 +14,7 @@ const AddEvents = () => {
 
     const onSubmit = (data) => {
         data.email = user?.email;
-        fetch("http://localhost:5000/addevents", {
+        fetch("https://ancient-lake-01432.herokuapp.com/addevents", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),

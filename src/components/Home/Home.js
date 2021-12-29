@@ -18,8 +18,8 @@ const Home = () => {
         setSearch(e.target.value);
     };
     const handleSearch = () => {
-        // fetch(`http://localhost:5000/searchEvent?search=${search}`)
-        /*   fetch(`http://localhost:5000/searchEvent?search=${search}`)
+        // fetch(`https://ancient-lake-01432.herokuapp.com/searchEvent?search=${search}`)
+        /*   fetch(`https://ancient-lake-01432.herokuapp.com/searchEvent?search=${search}`)
               .then((res) => res.json())
               .then((result) => setEvents(result));
    */

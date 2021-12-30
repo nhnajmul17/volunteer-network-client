@@ -1,19 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
-// import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchevents } from "../../Redux/VolunteerSlice/VolunteerSlice";
+import { useSelector } from "react-redux";
 const AllEvents = () => {
-    const [event, setEvent] = useState([]);
+    const dispatch = useDispatch()
+    const [control, setControl] = useState(false);
+    // const [event, setEvent] = useState([]);
 
-    const [control, setConrol] = useState(false);
+    /*    useEffect(() => {
+           fetch("https://ancient-lake-01432.herokuapp.com/events")
+               .then((res) => res.json())
+               .then((data) => setEvent(data));
+       }, [control]);
+    */
 
     useEffect(() => {
-        fetch("https://ancient-lake-01432.herokuapp.com/events")
-            .then((res) => res.json())
-            .then((data) => setEvent(data));
-    }, [control]);
+        dispatch(fetchevents())
 
-    // const event = useSelector(state => state.volunteer.events)
+    }, [dispatch, control])
+
+    const event = useSelector(state => state.volunteer.events)
 
     const handleDelete = (id) => {
         fetch(`https://ancient-lake-01432.herokuapp.com/deleteEvent/${id}`, {
@@ -23,10 +31,10 @@ const AllEvents = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data.deletedCount) {
-                    setConrol(!control);
+                    setControl(!control);
                     alert('events deleted')
                 } else {
-                    setConrol(false);
+                    setControl(false);
                 }
             });
     };

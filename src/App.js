@@ -13,6 +13,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import Login from './components/Login/Login';
 import AddEvents from './components/AddEvents/AddEvents';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+// import AllEvents from './components/AllEvents/AllEvents';
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
           <Route path='/register'>
             <RegisterForm></RegisterForm>
           </Route>
+          {/* <Route path='/manageEvents'>
+            <AllEvents></AllEvents>
+          </Route> */}
           {/* <Route path='/volunteers'>
             <Volunteers></Volunteers>
           </Route>

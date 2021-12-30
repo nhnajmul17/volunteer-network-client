@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchvolunteers } from "../../Redux/VolunteerSlice/VolunteerSlice";
 const AllVolunteers = () => {
-    const [volunteer, setVounteer] = useState([]);
+    // const [volunteer, setVounteer] = useState([]);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch("https://ancient-lake-01432.herokuapp.com/volunteers")
-            .then((res) => res.json())
-            .then((data) => setVounteer(data));
-    }, []);
+        dispatch(fetchvolunteers())
+    }, [dispatch])
+
+    const volunteer = useSelector(state => state.volunteer.volunteers)
+
+    // useEffect(() => {
+    //     fetch("https://ancient-lake-01432.herokuapp.com/volunteers")
+    //         .then((res) => res.json())
+    //         .then((data) => setVounteer(data));
+    // }, []);
 
     const handleDelete = (id) => {
         fetch(`https://ancient-lake-01432.herokuapp.com/deleteVolunteer/${id}`, {

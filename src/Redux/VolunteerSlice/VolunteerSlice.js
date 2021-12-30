@@ -9,9 +9,18 @@ export const fetchevents = createAsyncThunk(
         return response
     }
 )
+export const fetchvolunteers = createAsyncThunk(
+    'volunteer/volunteers',
+    async () => {
+        const response = await fetch('https://ancient-lake-01432.herokuapp.com/volunteers')
+            .then(res => res.json())
+        return response
+    }
+)
 
 const initialState = {
-    events: []
+    events: [],
+    volunteers: []
 }
 
 export const VolunteerSlice = createSlice({
@@ -29,6 +38,10 @@ export const VolunteerSlice = createSlice({
         builder.addCase(fetchevents.fulfilled, (state, action) => {
             // Add user to the state array
             state.events = (action.payload)
+        })
+        builder.addCase(fetchvolunteers.fulfilled, (state, action) => {
+            // Add user to the state array
+            state.volunteers = (action.payload)
         })
     },
 })

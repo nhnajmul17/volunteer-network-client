@@ -2,9 +2,31 @@ import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { fetchvolunteers } from "../../Redux/VolunteerSlice/VolunteerSlice";
+import { deletevolunteers, fetchvolunteers } from "../../Redux/VolunteerSlice/VolunteerSlice";
 const AllVolunteers = () => {
     // const [volunteer, setVounteer] = useState([]);
+    // useEffect(() => {
+    //     fetch("https://ancient-lake-01432.herokuapp.com/volunteers")
+    //         .then((res) => res.json())
+    //         .then((data) => setVounteer(data));
+    // }, []);
+
+    /*    const handleDelete = (id) => {
+           fetch(`https://ancient-lake-01432.herokuapp.com/deleteVolunteer/${id}`, {
+               method: "DELETE",
+               headers: { "content-type": "application/json" },
+           })
+               .then((res) => res.json())
+               .then((data) => {
+                   if (data.deletedCount) {
+                       alert('Deleted Volunteer')
+                       window.location.reload()
+                   } else {
+                   }
+               });
+       } */
+
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -12,26 +34,8 @@ const AllVolunteers = () => {
     }, [dispatch])
 
     const volunteer = useSelector(state => state.volunteer.volunteers)
-
-    // useEffect(() => {
-    //     fetch("https://ancient-lake-01432.herokuapp.com/volunteers")
-    //         .then((res) => res.json())
-    //         .then((data) => setVounteer(data));
-    // }, []);
-
     const handleDelete = (id) => {
-        fetch(`https://ancient-lake-01432.herokuapp.com/deleteVolunteer/${id}`, {
-            method: "DELETE",
-            headers: { "content-type": "application/json" },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.deletedCount) {
-                    alert('Deleted Volunteer')
-                    window.location.reload()
-                } else {
-                }
-            });
+        dispatch(deletevolunteers(id))
     }
 
     return (

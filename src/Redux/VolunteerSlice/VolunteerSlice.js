@@ -9,14 +9,73 @@ export const fetchevents = createAsyncThunk(
         return response
     }
 )
+
+export const addEvent = createAsyncThunk(
+    'volunteer/events',
+    async (data) => {
+        const response = await fetch("https://ancient-lake-01432.herokuapp.com/addevents", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((result) => console.log(result));
+        alert('Events added')
+        return response
+    }
+)
+
+export const addvolunteer = createAsyncThunk(
+    'volunteer/volunteers',
+    async (data) => {
+        const response = await fetch('https://ancient-lake-01432.herokuapp.com/volunteers', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.data.insertedId) {
+                    alert('volunteer added')
+                }
+            })
+        return response
+    }
+)
+
+
 export const fetchvolunteers = createAsyncThunk(
     'volunteer/volunteers',
     async () => {
         const response = await fetch('https://ancient-lake-01432.herokuapp.com/volunteers')
             .then(res => res.json())
+
         return response
     }
 )
+
+export const deletevolunteers = createAsyncThunk(
+    'volunteer/volunteers',
+    async (id) => {
+        const response = await fetch(`https://ancient-lake-01432.herokuapp.com/deleteVolunteer/${id}`, {
+            method: "DELETE",
+            headers: { "content-type": "application/json" },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.deletedCount) {
+                    alert('Deleted Volunteer')
+                    window.location.reload()
+                } else {
+                }
+            });
+        return response
+    }
+)
+
+
+
+
 
 const initialState = {
     events: [],

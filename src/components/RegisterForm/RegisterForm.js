@@ -1,12 +1,15 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { useDispatch } from 'react-redux';
+import { addvolunteer } from '../../Redux/VolunteerSlice/VolunteerSlice';
 import './Register.css'
 
 
 const RegisterForm = () => {
     const { register, handleSubmit, reset } = useForm();
-    const onSubmit = data => {
+    const dispatch = useDispatch()
+    /* const onSubmit = data => {
         axios.post('https://ancient-lake-01432.herokuapp.com/volunteers', data)
             .then(res => {
                 if (res.data.insertedId) {
@@ -14,6 +17,10 @@ const RegisterForm = () => {
                     reset();
                 }
             })
+    } */
+    const onSubmit = data => {
+        dispatch(addvolunteer(data))
+        reset()
     }
 
     return (

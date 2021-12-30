@@ -1,18 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import useFirebase from "../../Hooks/useFirebase";
+import { addEvent } from "../../Redux/VolunteerSlice/VolunteerSlice";
 
 const AddEvents = () => {
     const { user } = useFirebase();
+    const dispatch = useDispatch()
     const {
         register,
         handleSubmit,
         reset,
-
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
+    /* const onSubmit = (data) => {
         data.email = user?.email;
         fetch("https://ancient-lake-01432.herokuapp.com/addevents", {
             method: "POST",
@@ -23,7 +25,15 @@ const AddEvents = () => {
             .then((result) => console.log(result));
         alert('Events added')
         reset();
+    }; */
+    const onSubmit = (data) => {
+        data.email = user?.email;
+        dispatch(addEvent(data))
+        reset();
     };
+
+
+
     return (
         <div>
             <h1 className="mt-5 text-center text-success">Please Add Events</h1>
